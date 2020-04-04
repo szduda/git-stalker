@@ -1,0 +1,35 @@
+{
+  "dependencies": {
+    "@babel/runtime": "^7.8.3",
+    "@emotion/core": "^10.0.27",
+    "@material-ui/core": "^4.9.1",
+    "@material-ui/icons": "^4.9.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.2.0"
+  },
+  "name": "git-stalker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "@babel/core": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@babel/preset-react": "^7.8.3",
+    "babel-loader": "^8.0.6",
+    "babel-polyfill": "^6.26.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1"
+  },
+  "scripts": {
+    "test": "jest --no-cache --config ./jest.config.json --watch",
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --open --mode development"
+  },
+  "keywords": [],
+  "author": "Szymon Duda",
+  "license": "ISC",
+  "description": "Stalk Github users and stare at their repos peacefully."
+}
