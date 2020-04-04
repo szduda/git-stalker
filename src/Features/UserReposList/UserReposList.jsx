@@ -52,9 +52,11 @@ const ReposList = ({ repos }) => (
   </div>
 )
 
-const UserListItem = ({ user, expanded = false }) => (
+const UserListItem = ({ user, onToggle, expanded = false }) => (
   <li>
-    <button css={css`
+    <button
+      onClick={() => onToggle(user.name)}
+      css={css`
       background: #e5e5e5;
     `}>
       <Row css={css`justify-content: space-between;`}>
@@ -68,7 +70,7 @@ const UserListItem = ({ user, expanded = false }) => (
   </li>
 )
 
-export default ({ users, heading, expandedUserName }) => (
+export default ({ users, heading, expandedUserName, onUserToggle }) => (
   <div>
     <h1>{heading}</h1>
     {users
@@ -78,6 +80,7 @@ export default ({ users, heading, expandedUserName }) => (
             <UserListItem
               user={user}
               expanded={user.name === expandedUserName}
+              onToggle={onUserToggle}
               key={`user-${index}`}
             />
           ))}

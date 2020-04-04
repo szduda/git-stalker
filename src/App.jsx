@@ -4,6 +4,7 @@ import SearchBar from './Features/SearchBar/SearchBar'
 import UserReposList from './Features/UserReposList/UserReposList'
 
 const mockState = {
+  loading: false,
   searchTerm: 'usero',
   expandedUserName: 'usero two',
   users: [
@@ -31,11 +32,15 @@ const mockState = {
 
 export default () => (
   <AppWrapper>
-    <SearchBar />
+    <SearchBar
+      term={mockState.searchTerm}
+      onSearch={term => console.log('Search term changed:', term)}
+    />
     <UserReposList
       users={mockState.users}
       heading={`Showing users for "${mockState.searchTerm}"`}
       expandedUserName={mockState.expandedUserName}
+      onUserToggle={userName => console.log('User toggled:', userName)}
     />
   </AppWrapper>
 )
