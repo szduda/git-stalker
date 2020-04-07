@@ -12,7 +12,7 @@ const Styles = () => (
     }
 
     p, a, button, input {
-      font-size: 16px;
+      font-size: 14px;
       line-height: 1.4;
       font-weight: 400;
       box-sizing: border-box;
@@ -42,11 +42,18 @@ const Styles = () => (
     h2 {
       font-weight: 400;
       color: #444;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      width: 200px;
+      text-align: left;
     }
 
     h3 {
-      font-size: 20px;
+      font-size: 16px;
       margin-bottom: 5px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      width: 200px;
     }
 
     h4 {
@@ -92,7 +99,7 @@ export const AppWrapper = props => (
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      max-width: 1080px; 
+      max-width: 640px; 
       padding: 20px;
       margin: 0 auto;
     `} {...props} />
