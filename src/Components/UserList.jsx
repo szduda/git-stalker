@@ -1,7 +1,7 @@
 import React from 'react'
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
-import { Row } from '../Theme'
+import { Row } from './Theme'
 
 const RepoScore = ({ score }) => (
   <div>
@@ -53,37 +53,37 @@ const ReposList = ({ repos }) => (
 )
 
 const UserListItem = ({ user, onToggle, expanded = false }) => (
-  <li>
-    <button
-      onClick={() => onToggle(user.name)}
-      css={css`
+  <button
+    onClick={() => onToggle(user.name)}
+    css={css`
       background: #e5e5e5;
     `}>
-      <Row css={css`justify-content: space-between;`}>
-        <h2>
-          {user.name}
-        </h2>
-        <h4 css={css`transform: rotate(${expanded ? '180' : '0'}deg);`}>V</h4>
-      </Row>
-    </button>
-    {expanded && <ReposList repos={user.repos} />}
-  </li>
+    <Row>
+      <h2>
+        {user.name}
+      </h2>
+      <h4 css={css`transform: rotate(${expanded ? '180' : '0'}deg);`}>V</h4>
+    </Row>
+  </button >
 )
 
-export default ({ users, heading, expandedUserName, onUserToggle }) => (
-  <div>
-    <h1>{heading}</h1>
+export default ({ users, repos, searchTerm, expandedUserName, toggleUser }) => (
+  <div css={css`width: 100%;`}>
+    <h1>
+      Showing users for "{searchTerm}"
+    </h1>
     {users
       ? (
         <ul>
-          {users.map((user, index) => (
-            <UserListItem
-              user={user}
-              expanded={user.name === expandedUserName}
-              onToggle={onUserToggle}
-              key={`user-${index}`}
-            />
-          ))}
+          {users.map((user, index) => {
+            const expanded = user.name === expandedUserName
+            return (
+              <li key={`user-${index}`}>
+                <UserListItem {...{ user, expanded, onToggle: toggleUser }} />
+                {expanded && <ReposList {...{ repos }} />}
+              </li>
+            )
+          })}
         </ul>
       ) : (
         <p>No matching users found</p>

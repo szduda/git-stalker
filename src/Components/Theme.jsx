@@ -103,5 +103,6 @@ export const Row = props => (
   <div css={css`
   display: flex;
   width: 100%;
+  justify-content: space-between;
   `} {...props} />
 )
