@@ -1,3 +1,5 @@
+import { collapse } from '../UserReposList/repos.actions'
+
 const USERS_PAGE_SIZE = 5
 const buildRequest = userName =>
   `https://api.github.com/search/users?q=${userName}&per_page=${USERS_PAGE_SIZE}`
@@ -23,6 +25,7 @@ export const mapRepos = (userName, repos) => ({
 
 export const fetchUsers = userName => async dispatch => {
   dispatch(requestUsers(userName))
+  dispatch(collapse)
 
   const request = buildRequest(userName)
   let result

@@ -36,7 +36,7 @@ const RepoListItem = ({ repo }) => (
 
 const ReposList = ({ repos }) => (
   <div css={css`margin-left: 20px;`}>
-    {repos
+    {repos && repos.length
       ? (
         <ul>
           {repos.map((repo, index) => (

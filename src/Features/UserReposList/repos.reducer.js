@@ -21,7 +21,6 @@ const reposReducer = (state = defaultRepos, action) => {
     case 'COLLAPSE':
       return {
         ...state,
-        loading: false,
         expandedUserName: null
       }
 
