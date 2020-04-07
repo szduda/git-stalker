@@ -2,7 +2,6 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  debug: true,
   devtool: 'source-map',
   devServer: {
     historyApiFallback: {
@@ -23,7 +22,21 @@ module.exports = {
         use: {
           loader: 'html-loader'
         }
-      }
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: "babel-loader"
+          },
+          {
+            loader: "react-svg-loader",
+            options: {
+              jsx: true // true outputs JSX tags
+            }
+          }
+        ]
+      },
     ]
   },
   resolve: {

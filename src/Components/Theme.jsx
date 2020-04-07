@@ -58,6 +58,7 @@ const Styles = () => (
 
     h4 {
       font-size: 16px;
+      line-height: 1;
     }
 
     button {

@@ -1,20 +1,21 @@
 import React from 'react'
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
+import ExpandIcon from '../Assets/expand.svg'
 import { Row } from './Theme'
+import StarIcon from '../Assets/star.svg'
 
 const RepoScore = ({ score }) => (
-  <div>
-    <h4 css={css`
-    border-radius: 20px; 
-    border: 1px solid #000; 
-    width: 24px; 
-    height: 24px; 
-    display: flex; 
-    justify-content: center;
-    `}>
+  <div css={css`
+  display: flex; 
+  align-items: flex-end;
+  align-self: baseline;
+  height: 20px;
+  `}>
+    <h4>
       {score}
     </h4>
+    <StarIcon />
   </div>
 )
 
@@ -62,7 +63,7 @@ const UserListItem = ({ user, onToggle, expanded = false }) => (
       <h2>
         {user.name}
       </h2>
-      <h4 css={css`transform: rotate(${expanded ? '180' : '0'}deg);`}>V</h4>
+      <ExpandIcon css={css`transform: rotate(${expanded ? '180' : '0'}deg);`} />
     </Row>
   </button >
 )
