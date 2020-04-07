@@ -67,26 +67,35 @@ const UserListItem = ({ user, onToggle, expanded = false }) => (
   </button >
 )
 
-export default ({ users, repos, searchTerm, expandedUserName, toggleUser }) => (
+export default ({ users, repos, searchTerm, expandedUserName, fetchRepos, collapse }) => (
   <div css={css`width: 100%;`}>
-    <h1>
-      Showing users for "{searchTerm}"
-    </h1>
-    {users
+    {users && users.length
       ? (
-        <ul>
-          {users.map((user, index) => {
-            const expanded = user.name === expandedUserName
-            return (
-              <li key={`user-${index}`}>
-                <UserListItem {...{ user, expanded, onToggle: toggleUser }} />
-                {expanded && <ReposList {...{ repos }} />}
-              </li>
-            )
-          })}
-        </ul>
+        <>
+          <h1>
+            Showing users for "{searchTerm}"
+          </h1>
+          <ul>
+            {users.map((user, index) => {
+              const expanded = user.name === expandedUserName
+              return (
+                <li key={`user-${index}`}>
+                  <UserListItem {...{
+                    user,
+                    expanded,
+                    onToggle: userName =>
+                      userName === expandedUserName
+                        ? collapse()
+                        : fetchRepos(userName)
+                  }} />
+                  {expanded && <ReposList {...{ repos }} />}
+                </li>
+              )
+            })}
+          </ul>
+        </>
       ) : (
-        <p>No matching users found</p>
+        searchTerm && <p>No matching users found</p>
       )}
   </div>
 )

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import UserList from '../../Components/UserList'
-import { fetchRepos } from './repos.actions'
+import { fetchRepos, collapse } from './repos.actions'
 import { selectUsers } from '../UserSearch/users.selectors'
 import { selectUserRepos } from './repos.selectors'
 
@@ -13,6 +13,7 @@ export default connect(
     repos: selectUserRepos(state)
   }),
   dispatch => ({
-    toggleUser: userName => dispatch(fetchRepos(userName))
+    fetchRepos: userName => dispatch(fetchRepos(userName)),
+    collapse: () => dispatch(collapse)
   })
 )(UserList)

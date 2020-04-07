@@ -15,6 +15,11 @@ const receiveRepos = repos => ({
   repos
 })
 
+export const COLLAPSE = 'COLLAPSE'
+export const collapse = ({
+  type: COLLAPSE
+})
+
 export const fetchRepos = userName => async dispatch => {
   dispatch(requestRepos(userName))
 
