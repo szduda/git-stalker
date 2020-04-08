@@ -1,15 +1,3 @@
-import { combineReducers } from 'redux'
-import users from './Features/UserSearch/users.reducer'
-import repos from './Features/UserReposList/repos.reducer'
-
-export default combineReducers({
-  users,
-  repos,
-})
-
-
-
-
 export const mockState = {
   repos: {
     loading: false,
