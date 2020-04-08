@@ -5,3 +5,6 @@ Stalk GitHub users and stare at their repos peacefully.
 To begin stalking, simply  
 `yarn install` the dependencies, then  
 `yarn start` the app.
+
+## Running tests
+`yarn test`
