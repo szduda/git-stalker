@@ -12,6 +12,10 @@ const Styles = () => (
       padding: 0;
     }
 
+    p, a {
+      word-break: break-word;
+    }
+
     p, a, button, input {
       font-size: 14px;
       line-height: 1.4;
