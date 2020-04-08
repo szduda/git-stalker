@@ -40,7 +40,7 @@ export const fetchUsers = userName => async dispatch => {
     console.log('Failed to serialize data because:', error)
   }
 
-  let users = parseUsers(result.items)
+  let users = parseUsers(result?.items ?? [])
   dispatch(receiveUsers(users))
 }
 

@@ -4,6 +4,7 @@ import { jsx, css } from '@emotion/core'
 import ExpandIcon from '../Assets/expand.svg'
 import { Row } from './Theme'
 import StarIcon from '../Assets/star.svg'
+import { LoadingIndicator } from './Theme'
 
 const RepoScore = ({ score }) => (
   <div css={css`
@@ -35,23 +36,25 @@ const RepoListItem = ({ repo }) => (
   </li>
 )
 
-const ReposList = ({ repos }) => (
-  <div css={css`margin-left: 20px;`}>
-    {repos && repos.length
-      ? (
-        <ul>
-          {repos.map((repo, index) => (
-            <RepoListItem
-              repo={repo}
-              key={`repo-${index}`}
-            />
-          ))}
-        </ul>
-      ) : (
-        <p>This user has no public repositories to show</p>
-      )}
-  </div>
-)
+const ReposList = ({ repos, visible, loading }) => visible
+  ? (
+    <div css={css`margin-left: 20px;`}>
+      <LoadingIndicator visible={loading} />
+      {repos && repos.length
+        ? (
+          <ul>
+            {repos.map((repo, index) => (
+              <RepoListItem
+                repo={repo}
+                key={`repo-${index}`}
+              />
+            ))}
+          </ul>
+        ) : (
+          !loading && <p>This user has no public repositories to show</p>
+        )}
+    </div>
+  ) : null
 
 const UserListItem = ({ user, onToggle, expanded = false }) => (
   <button
@@ -68,11 +71,15 @@ const UserListItem = ({ user, onToggle, expanded = false }) => (
   </button >
 )
 
-export default ({ users, repos, searchTerm, expandedUserName, fetchRepos, collapse }) => (
-  <div css={css`width: 100%;`}>
-    {users && users.length
-      ? (
-        <>
+export default ({
+  users, loadingUsers, searchTerm,
+  repos, loadingRepos, expandedUserName,
+  fetchRepos, collapse
+}) => (
+    <div css={css`width: 100%;`}>
+      <LoadingIndicator visible={loadingUsers} />
+      {!loadingUsers && users && users.length
+        ? (<>
           <h1>
             Showing users for "{searchTerm}"
           </h1>
@@ -89,14 +96,17 @@ export default ({ users, repos, searchTerm, expandedUserName, fetchRepos, collap
                         ? collapse()
                         : fetchRepos(userName)
                   }} />
-                  {expanded && <ReposList {...{ repos }} />}
+                  <ReposList
+                    repos={repos}
+                    visible={expanded}
+                    loading={loadingRepos}
+                  />
                 </li>
               )
             })}
           </ul>
-        </>
-      ) : (
-        searchTerm && <p>No matching users found</p>
-      )}
-  </div>
-)
+        </>) : (
+          searchTerm && !loadingUsers && <p>No matching users found</p>
+        )}
+    </div>
+  )

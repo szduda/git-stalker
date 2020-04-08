@@ -10,7 +10,9 @@ export default connect(
     searchTerm: state.users.searchTerm,
     expandedUserName: state.repos.expandedUserName,
     users: selectUsers(state.users.items),
-    repos: selectUserRepos(state)
+    repos: selectUserRepos(state),
+    loadingUsers: state.users.loading,
+    loadingRepos: state.repos.loading
   }),
   dispatch => ({
     fetchRepos: userName => dispatch(fetchRepos(userName)),

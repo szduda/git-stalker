@@ -1,6 +1,7 @@
 import React from 'react'
 /** @jsx jsx */
 import { jsx, css, Global } from '@emotion/core'
+import SpinnerIcon from '../Assets/spinner.svg'
 
 const Styles = () => (
   <Global styles={css`
@@ -114,3 +115,11 @@ export const Row = props => (
   justify-content: space-between;
   `} {...props} />
 )
+
+export const LoadingIndicator = ({ visible }) => visible
+  ? (
+    <SpinnerIcon css={css`
+    display: block; 
+    margin: 20px auto;
+    `} />
+  ) : null
