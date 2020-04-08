@@ -1,7 +1,7 @@
 import React from 'react'
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
-import { Row } from './Theme'
+import { Row, LoadingIndicator } from './Theme'
 import StarIcon from '../Assets/star.svg'
 import FetchedListWrapper from './FetchedListWrapper'
 
@@ -40,8 +40,9 @@ export default ({ repos, visible, loading }) => (
     visible,
     loading,
     hasData: repos?.length,
-    noDataMessage: 'The user has no public repositories.',
-    css: css`margin-left: 20px;`
+    noDataMessage: 'No public repositories found.',
+    css: css`margin-left: 20px;`,
+    loadingIndicator: <LoadingIndicator />
   }}>
     <ul>
       {repos.map((repo, index) => (

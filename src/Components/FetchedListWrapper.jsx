@@ -1,15 +1,14 @@
 import React from 'react'
-import { LoadingIndicator } from './Theme'
 
-export default ({ visible, loading, hasData, noDataMessage, children, ...rest }) => visible
+export default ({ visible, loading, hasData, noDataMessage, children, loadingIndicator, ...rest }) => visible
   ? (
     <div {...rest}>
-      <LoadingIndicator visible={loading} />
+      {loading && loadingIndicator}
       {hasData
         ? (
           <>{children}</>
         ) : (
-          !loading && <p>{noDataMessage}</p>
+          !loading && <p className="noDataMessage">{noDataMessage}</p>
         )}
     </div>
   ) : null

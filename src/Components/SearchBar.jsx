@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
 
-export default ({ search }) => {
+export default ({ search, ...rest }) => {
   let input
 
   const submit = event => {
@@ -17,7 +17,7 @@ export default ({ search }) => {
   }
 
   return (
-    <div css={css`width: 100%;`}>
+    <div css={css`width: 100%;`} {...rest}>
       <form onSubmit={submit}>
         <input
           type="text"

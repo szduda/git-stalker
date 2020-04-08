@@ -9,6 +9,11 @@ const requestRepos = userName => ({
   userName
 })
 
+export const REQUEST_REPOS_ERROR = 'REQUEST_REPOS_ERROR'
+const requestReposError = () => ({
+  type: REQUEST_REPOS_ERROR,
+})
+
 export const RECEIVE_REPOS = 'RECEIVE_REPOS'
 const receiveRepos = repos => ({
   type: RECEIVE_REPOS,
@@ -24,25 +29,31 @@ export const fetchRepos = userName => async dispatch => {
   dispatch(requestRepos(userName))
 
   const request = buildRequest(userName)
-  let result
+  console.log(request)
+  let response, data
   try {
-    result = await fetch(request)
+    response = await fetch(request)
   } catch (error) {
     console.log('Failed to fetch data because:', error)
   }
-  try {
-    result = await result.json()
-  } catch (error) {
-    console.log('Failed to serialize data because:', error)
+
+  if (response.ok) {
+    try {
+      data = await response.json()
+    } catch (error) {
+      console.log('Failed to serialize data because:', error)
+    }
+    const repos = parseRepos(data)
+
+    dispatch(receiveRepos(repos))
+    dispatch(mapToUser(userName, Object.keys(repos)))
   }
-
-  const repos = parseRepos(result)
-
-  dispatch(receiveRepos(repos))
-  dispatch(mapToUser(userName, Object.keys(repos)))
+  else {
+    dispatch(requestReposError())
+  }
 }
 
-const parseRepos = items => items.reduce((reposObj, item) => {
+export const parseRepos = items => items.reduce((reposObj, item) => {
   const { id, name, description, watchers_count } = item
   reposObj[item['id']] = {
     id,

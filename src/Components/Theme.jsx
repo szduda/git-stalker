@@ -120,7 +120,7 @@ export const Row = props => (
   `} {...props} />
 )
 
-export const LoadingIndicator = ({ visible }) => visible
+export const LoadingIndicator = ({ visible = true }) => visible
   ? (
     <SpinnerIcon css={css`
     display: block; 

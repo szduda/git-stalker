@@ -2,7 +2,7 @@ import React from 'react'
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
 import ExpandIcon from '../Assets/expand.svg'
-import { Row } from './Theme'
+import { Row, LoadingIndicator } from './Theme'
 import FetchedListWrapper from './FetchedListWrapper'
 import RepoList from './RepoList'
 
@@ -29,6 +29,7 @@ export default ({
       hasData={users?.length}
       noDataMessage="No matching users found."
       css={css`width: 100%`}
+      loadingIndicator={<LoadingIndicator />}
     >
       <h1>
         Showing users for "{searchTerm}"

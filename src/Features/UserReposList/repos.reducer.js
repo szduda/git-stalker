@@ -12,6 +12,11 @@ const reposReducer = (state = defaultRepos, action) => {
         loading: true,
         expandedUserName: action.userName
       }
+    case 'REQUEST_REPOS_ERROR':
+      return {
+        ...state,
+        loading: false,
+      }
     case 'RECEIVE_REPOS':
       return {
         ...state,

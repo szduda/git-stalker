@@ -44,7 +44,7 @@ export const fetchUsers = userName => async dispatch => {
   dispatch(receiveUsers(users))
 }
 
-const parseUsers = items => items.reduce((usersObj, item) => {
+export const parseUsers = items => items.reduce((usersObj, item) => {
   const { login } = item
   usersObj[login] = { name: login, repos: [] }
   return usersObj
